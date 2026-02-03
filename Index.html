@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 🎉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(120deg,#ff6ec4,#7873f5);
+  animation: bg 8s infinite alternate;
+}
+
+@keyframes bg{
+  0%{background-position:left;}
+  100%{background-position:right;}
+}
+
+.container{
+  text-align:center;
+  color:#fff;
+  z-index:2;
+}
+
+h1{
+  font-size:3rem;
+  margin-bottom:10px;
+}
+
+.typing{
+  font-size:1.5rem;
+  border-right:3px solid #fff;
+  white-space:nowrap;
+  overflow:hidden;
+  width:0;
+  animation: typing 4s steps(30,end) forwards, blink 1s infinite;
+}
+
+@keyframes typing{
+  to{width:100%;}
+}
+@keyframes blink{
+  50%{border-color:transparent;}
+}
+
+button{
+  margin-top:30px;
+  padding:12px 25px;
+  font-size:1rem;
+  border:none;
+  border-radius:30px;
+  background:#fff;
+  color:#ff4d88;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* Balloons */
+.balloon{
+  position:absolute;
+  bottom:-100px;
+  width:60px;
+  height:80px;
+  border-radius:50%;
+  animation: float 8s infinite ease-in;
+}
+
+.balloon::after{
+  content:'';
+  position:absolute;
+  width:2px;
+  height:40px;
+  background:#fff;
+  top:80px;
+  left:50%;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-120vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🎂 Happy Birthday 🎉</h1>
+  <div class="typing">Wishing you joy, success & happiness!</div>
+  <button onclick="confetti()">Celebrate 🎊</button>
+</div>
+
+<!-- Balloons -->
+<div class="balloon" style="left:10%; background:#ff4d4d;"></div>
+<div class="balloon" style="left:30%; background:#4ddbff;"></div>
+<div class="balloon" style="left:50%; background:#ffee58;"></div>
+<div class="balloon" style="left:70%; background:#7cff4d;"></div>
+<div class="balloon" style="left:90%; background:#ff7cf0;"></div>
+
+<script>
+function confetti(){
+  for(let i=0;i<100;i++){
+    let div=document.createElement("div");
+    div.style.position="absolute";
+    div.style.width="10px";
+    div.style.height="10px";
+    div.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    div.style.left=Math.random()*100+"vw";
+    div.style.top="-10px";
+    div.style.animation=`fall ${Math.random()*3+2}s linear`;
+    document.body.appendChild(div);
+
+    setTimeout(()=>div.remove(),5000);
+  }
+}
+
+const style=document.createElement("style");
+style.innerHTML=`
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);}
+}`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
